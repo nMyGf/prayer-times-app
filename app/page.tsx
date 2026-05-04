@@ -97,7 +97,7 @@ const [prayerData, setPrayerData] = useState<any>(null)
   }, [isDarkMode])
 
   if (showSplash) {
-    return <SplashScreen onComplete={() => setShowSplash(false)} selectedLang={selectedLang} />
+    return <SplashScreen onComplete={() => setShowSplash(false)} selectedLang={selectedLang as any} />
   }
 
   return (
@@ -132,16 +132,16 @@ const [prayerData, setPrayerData] = useState<any>(null)
       {/* Map Component */}
 <MapComponent 
   onLoadingChange={setIsLoading} 
-  selectedLang={selectedLang} 
+  selectedLang={selectedLang as any} 
   useAgreedTime={useAgreedTime}
 />
 
 <NextPrayerCountdown 
-  selectedLang={selectedLang}
+  selectedLang={selectedLang as any}
 />
       {/* Settings Panels */}
-      <SettingsPanel useAgreedTime={false} onModeChange={setUseAgreedTime} selectedLang={selectedLang} />
-      <SettingsPanel useAgreedTime={true} onModeChange={setUseAgreedTime} selectedLang={selectedLang} />
+      <SettingsPanel useAgreedTime={false} onModeChange={setUseAgreedTime} selectedLang={selectedLang as any} />
+      <SettingsPanel useAgreedTime={true} onModeChange={setUseAgreedTime} selectedLang={selectedLang as any} />
 
       {/* User Guide Dialog */}
       <UserGuideDialog isOpen={showUserGuide} onClose={() => setShowUserGuide(false)} lang={selectedLang as any} />
