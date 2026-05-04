@@ -5,6 +5,7 @@ import { useGoogleMaps } from "@/hooks/use-google-maps"
 import { usePrayerCalculations } from "@/hooks/use-prayer-calculations"
 import { useTranslation } from "@/hooks/use-translation"
 import { LocateFixed } from "lucide-react"
+type Lang = "tr" | "fr" | "en" | "ar" | "ur" | "hi" | "de"
 declare global {
   interface Window {
 qiblaArrow: any
@@ -31,7 +32,7 @@ qiblaArrow: any
 
 interface MapComponentProps {
   onLoadingChange: (loading: boolean) => void
-  selectedLang: string
+  selectedLang: Lang
   useAgreedTime: boolean
 }
 

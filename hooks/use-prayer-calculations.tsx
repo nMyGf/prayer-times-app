@@ -1,7 +1,9 @@
 "use client"
 
+
 import { useCallback } from "react"
 import { useTranslation } from "@/hooks/use-translation"
+type Lang = "tr" | "fr" | "en" | "ar" | "ur" | "hi" | "de"
 
 const GOOGLE_MAPS_API_KEY = "AIzaSyBJvmCNWOi3YMMLneoTH4zlRHoR5rHUVyE"
 
@@ -52,7 +54,7 @@ declare global {
 }
 
 export function usePrayerCalculations() {
-  const { t } = useTranslation("en") // Default language
+  const { t } = useTranslation("en") as any // Default language
 
   const getRealTimezone = useCallback(async (lat: number, lng: number) => {
     const timestamp = Math.floor(Date.now() / 1000)
@@ -294,7 +296,9 @@ export function usePrayerCalculations() {
 
       if (methodId === "auto") {
         const countryCode = geocodeResult?.address_components?.find((c: any) => c.types.includes("country"))?.short_name
-        methodToUse = countryMethods[countryCode as keyof typeof countryMethods] || countryMethods["default"]
+        methodToUse = String(
+  countryMethods[countryCode as keyof typeof countryMethods] || countryMethods["default"]
+)
         // For auto mode, we'll get the method name from API response later
       } else {
         methodToUse = methodId
@@ -529,7 +533,7 @@ export function usePrayerCalculations() {
   )
 
   const updateCountdown = useCallback(
-    (selectedLang: string) => {
+    (selectedLang: Lang) => {
       if (!window.prayerTimes || Object.keys(window.prayerTimes).length === 0) return
       const remaining = calculateTimeRemaining(window.prayerTimes, selectedLang)
       if (!remaining) return
@@ -557,7 +561,7 @@ export function usePrayerCalculations() {
   )
 
   const startClocksAndTimers = useCallback(
-    (timeZoneId: string, selectedLang: string) => {
+    (timeZoneId: string, selectedLang: Lang) => {
       if (window.currentClockInterval) clearInterval(window.currentClockInterval)
       window.currentClockInterval = setInterval(() => {
         const clockElement = document.getElementById("liveClock")
