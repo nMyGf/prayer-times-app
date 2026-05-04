@@ -84,7 +84,7 @@ const asrDefaults = {
 }
 
 export function SettingsPanel({ useAgreedTime, onModeChange, selectedLang }: SettingsPanelProps) {
-  const { t } = useTranslation(selectedLang)
+  const { t } = useTranslation(selectedLang as any)
 
   useEffect(() => {
     const setupEventListeners = () => {
